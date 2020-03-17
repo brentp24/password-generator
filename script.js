@@ -24,7 +24,7 @@ function generatePassword () {
 
 // Choose a length of at least 8 characters and no more than 128 characters
   var characterLength = prompt("How many characters? (8-128 characters)");
-    console.log(characterLength);
+
     while (characterLength < 8 || characterLength >128) {
       characterLength = prompt("How many characters? (8-128 characters)");
     }
@@ -37,7 +37,6 @@ function generatePassword () {
   var specialCharacters = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
   var selectedArrays = "";
   var selectedCharacters = "";
-  
   var criteriaRequirements = [lowercaseCharacters, uppercaseCharacters, numericCharacters, specialCharacters];
 
 // Choose lowercase, uppercase, numeric, and/or special characters
@@ -45,7 +44,7 @@ function generatePassword () {
   for (var i = 0; i < criteriaLength; i++) {
   var myCriteria = prompt("Would you like to include " + criteria[i] + "? (y/n)");
   myCriteria = myCriteria.toLowerCase();
-  console.log(myCriteria);
+
   
   //Include those with "y" answers. 
     if (myCriteria === "y" || myCriteria === "yes") {
@@ -56,24 +55,20 @@ function generatePassword () {
         }
         //append the array to choose from
         selectedArrays = selectedArrays.concat(criteriaRequirements[i]);
-        console.log(includedCriteria)
+ 
         //append the selected characters
         selectedCharacters = selectedCharacters.concat(includedCriteria);
-        console.log(selectedArrays);
-        console.log(selectedCharacters.length)
+
     }
   }
  
 //Generate Password with criteria 
 var result = ""; 
-
 for (var j = 0; j < characterLength - selectedCharacters.length; j++) {
   result += selectedArrays.charAt(Math.floor(Math.random() * selectedArrays.length));
 
 } 
+// add in selectedCharacters (I couldn't figure out how to get them in there in random spots.)
 result = result + selectedCharacters
 return result
-
-
-
 }
