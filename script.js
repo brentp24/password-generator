@@ -29,14 +29,15 @@ function generatePassword () {
       characterLength = prompt("How many characters? (8-128 characters)");
     }
 
-
-
   var criteria = ["lowercase letters", "uppercase letters", "numbers", "special characters"]  
   var criteriaLength = criteria.length;
-  var lowercaseCharacters = "abcdefghijklmnopqrstuvwxyz".split("");
-  var uppercaseCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  var numericCharacters = "0123456789".split("");
-  var specialCharacters = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~".split("");
+  var lowercaseCharacters = "abcdefghijklmnopqrstuvwxyz";
+  var uppercaseCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var numericCharacters = "0123456789";
+  var specialCharacters = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+  var selectedArrays = "";
+  var selectedCharacters = "";
+  
   var criteriaRequirements = [lowercaseCharacters, uppercaseCharacters, numericCharacters, specialCharacters];
 
 // Choose lowercase, uppercase, numeric, and/or special characters
@@ -53,18 +54,25 @@ function generatePassword () {
         while (criteriaRequirements[i].includes(includedCriteria) == false) {
           includedCriteria = prompt("Please choose " + criteria[i].slice(0, -1) + " to include");
         }
+        //append the array to choose from
+        selectedArrays = selectedArrays.concat(criteriaRequirements[i]);
         console.log(includedCriteria)
+        //append the selected characters
+        selectedCharacters = selectedCharacters.concat(includedCriteria);
+        console.log(selectedArrays);
+        console.log(selectedCharacters.length)
     }
   }
+ 
+//Generate Password with criteria 
+var result = ""; 
 
+for (var j = 0; j < characterLength - selectedCharacters.length; j++) {
+  result += selectedArrays.charAt(Math.floor(Math.random() * selectedArrays.length));
 
-
-// WHEN all prompts are answered
-// THEN a password is generated that matches the selected criteria
-
-
-// WHEN the password is generated
-// THEN the password is either displayed in an alert or written to the page
+} 
+result = result + selectedCharacters
+return result
 
 
 
